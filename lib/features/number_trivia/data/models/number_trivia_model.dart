@@ -20,4 +20,7 @@ class NumberTriviaModel extends NumberTrivia {
       'number': number,
     };
   }
+
+  @override
+  List<Object> get props => super.props..addAll([text, number]);
 }

@@ -13,4 +13,7 @@ class InputConverter {
   }
 }
 
-class InvalidInputFailure extends Failure {}
+class InvalidInputFailure extends Failure {
+  @override
+  List<Object> get props => [];
+}
