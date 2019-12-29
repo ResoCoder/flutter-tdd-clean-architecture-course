@@ -60,12 +60,11 @@ class _TriviaControlsState extends State<TriviaControls> {
   void dispatchConcrete() {
     controller.clear();
     BlocProvider.of<NumberTriviaBloc>(context)
-        .dispatch(GetTriviaForConcreteNumber(inputStr));
+        .add(GetTriviaForConcreteNumber(inputStr));
   }
 
   void dispatchRandom() {
     controller.clear();
-    BlocProvider.of<NumberTriviaBloc>(context)
-        .dispatch(GetTriviaForRandomNumber());
+    BlocProvider.of<NumberTriviaBloc>(context).add(GetTriviaForRandomNumber());
   }
 }
