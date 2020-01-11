@@ -42,7 +42,7 @@ void main() {
     );
 
     test(
-      'should throw a CacheExeption when there is not a cached value',
+      'should throw a CacheException when there is not a cached value',
       () async {
         // arrange
         when(mockSharedPreferences.getString(any)).thenReturn(null);
