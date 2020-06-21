@@ -29,6 +29,11 @@ void main() {
         .thenAnswer((_) async => http.Response(fixture('trivia.json'), 200));
   }
 
+  void setUpMockHttpClientSuccess200Infinity() {
+    when(mockHttpClient.get(any, headers: anyNamed('headers')))
+        .thenAnswer((_) async => http.Response(fixture('trivia_infinity.json'), 200));
+  }
+
   void setUpMockHttpClientFailure404() {
     when(mockHttpClient.get(any, headers: anyNamed('headers')))
         .thenAnswer((_) async => http.Response('Something went wrong', 404));
@@ -108,6 +113,19 @@ void main() {
         final result = await dataSource.getRandomNumberTrivia();
         // assert
         expect(result, equals(tNumberTriviaModel));
+      },
+    );
+
+    test(
+      '''should throw a ServerException when the response code is 200 (success)
+      but the Trivia number is null (infinity)''',
+      () async {
+        // arrange
+        setUpMockHttpClientSuccess200Infinity();
+        // act
+        final call = dataSource.getRandomNumberTrivia;
+        // assert
+        expect(() => call(), throwsA(TypeMatcher<ServerException>()));
       },
     );
 
