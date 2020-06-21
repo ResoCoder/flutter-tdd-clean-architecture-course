@@ -48,11 +48,18 @@ void main() {
         when(mockInputConverter.stringToUnsignedInteger(any))
             .thenReturn(Right(tNumberParsed));
 
+    void setUpMockGetConcreteNumberTriviaSuccess() =>
+        when(mockGetConcreteNumberTrivia(any))
+            .thenAnswer((_) async => Right(tNumberTrivia));
+
     test(
       'should call the InputConverter to validate and convert the string to an unsigned integer',
       () async {
         // arrange
         setUpMockInputConverterSuccess();
+        // MEMO: need add this, or Unhandled error NoSuchMethodError: The method 'fold' was called on null.
+        setUpMockGetConcreteNumberTriviaSuccess();
+
         // act
         bloc.add(GetTriviaForConcreteNumber(tNumberString));
         await untilCalled(mockInputConverter.stringToUnsignedInteger(any));
@@ -83,8 +90,7 @@ void main() {
       () async {
         // arrange
         setUpMockInputConverterSuccess();
-        when(mockGetConcreteNumberTrivia(any))
-            .thenAnswer((_) async => Right(tNumberTrivia));
+        setUpMockGetConcreteNumberTriviaSuccess();
         // act
         bloc.add(GetTriviaForConcreteNumber(tNumberString));
         await untilCalled(mockGetConcreteNumberTrivia(any));
@@ -98,8 +104,8 @@ void main() {
       () async {
         // arrange
         setUpMockInputConverterSuccess();
-        when(mockGetConcreteNumberTrivia(any))
-            .thenAnswer((_) async => Right(tNumberTrivia));
+        setUpMockGetConcreteNumberTriviaSuccess();
+
         // assert later
         final expected = [
           Empty(),

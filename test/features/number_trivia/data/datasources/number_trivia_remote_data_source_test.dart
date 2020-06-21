@@ -16,6 +16,9 @@ void main() {
   NumberTriviaRemoteDataSourceImpl dataSource;
   MockHttpClient mockHttpClient;
 
+  final tNumberTriviaModel =
+      NumberTriviaModel.fromJson(json.decode(fixture('trivia.json')));
+
   setUp(() {
     mockHttpClient = MockHttpClient();
     dataSource = NumberTriviaRemoteDataSourceImpl(client: mockHttpClient);
@@ -33,8 +36,6 @@ void main() {
 
   group('getConcreteNumberTrivia', () {
     final tNumber = 1;
-    final tNumberTriviaModel =
-        NumberTriviaModel.fromJson(json.decode(fixture('trivia.json')));
 
     test(
       '''should perform a GET request on a URL with number
@@ -80,12 +81,9 @@ void main() {
   });
 
   group('getRandomNumberTrivia', () {
-    final tNumberTriviaModel =
-        NumberTriviaModel.fromJson(json.decode(fixture('trivia.json')));
-
     test(
-      '''should perform a GET request on a URL with number
-       being the endpoint and with application/json header''',
+      '''should perform a GET request on a URL with *random* endpoint
+      with application/json header''',
       () async {
         // arrange
         setUpMockHttpClientSuccess200();
