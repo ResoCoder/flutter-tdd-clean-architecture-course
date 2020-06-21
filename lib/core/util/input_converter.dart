@@ -5,8 +5,12 @@ class InputConverter {
   Either<Failure, int> stringToUnsignedInteger(String str) {
     try {
       final integer = int.parse(str);
-      if (integer < 0) throw FormatException();
+      if (integer < 0) {
+        throw FormatException();
+      }
       return Right(integer);
+    } on ArgumentError {
+      return Left(InvalidInputFailure());
     } on FormatException {
       return Left(InvalidInputFailure());
     }
