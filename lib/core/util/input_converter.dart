@@ -9,6 +9,8 @@ class InputConverter {
         throw FormatException();
       }
       return Right(integer);
+    } on ArgumentError {
+      return Left(InvalidInputFailure());
     } on FormatException {
       return Left(InvalidInputFailure());
     }

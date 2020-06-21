@@ -23,6 +23,18 @@ void main() {
     );
 
     test(
+      'should return a Failure when the string is null',
+      () async {
+        // arrange
+        final str = null;
+        // act
+        final result = inputConverter.stringToUnsignedInteger(str);
+        // assert
+        expect(result, Left(InvalidInputFailure()));
+      },
+    );
+
+    test(
       'should return a Failure when the string is not an integer',
       () async {
         // arrange
