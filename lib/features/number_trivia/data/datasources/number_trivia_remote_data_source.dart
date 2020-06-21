@@ -41,8 +41,7 @@ class NumberTriviaRemoteDataSourceImpl implements NumberTriviaRemoteDataSource {
 
     if (response.statusCode == 200) {
       return NumberTriviaModel.fromJson(json.decode(response.body));
-    } else {
-      throw ServerException();
     }
+    throw ServerException();
   }
 }
