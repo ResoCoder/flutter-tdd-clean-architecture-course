@@ -2,6 +2,8 @@ import 'package:clean_architecture_tdd_course/features/number_trivia/presentatio
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../number_trivia_keys.dart';
+
 class TriviaControls extends StatefulWidget {
   const TriviaControls({
     Key key,
@@ -20,6 +22,7 @@ class _TriviaControlsState extends State<TriviaControls> {
     return Column(
       children: <Widget>[
         TextField(
+          key: Key(NumberTriviaKeys.txtFieldNumber),
           controller: controller,
           keyboardType: TextInputType.number,
           decoration: InputDecoration(
@@ -38,6 +41,7 @@ class _TriviaControlsState extends State<TriviaControls> {
           children: <Widget>[
             Expanded(
               child: RaisedButton(
+                key: Key(NumberTriviaKeys.btnGetNumberTrivia),
                 child: Text('Search'),
                 color: Theme.of(context).accentColor,
                 textTheme: ButtonTextTheme.primary,
@@ -47,6 +51,7 @@ class _TriviaControlsState extends State<TriviaControls> {
             SizedBox(width: 10),
             Expanded(
               child: RaisedButton(
+                key: Key(NumberTriviaKeys.btnGetRandomNumberTrivia),
                 child: Text('Get random trivia'),
                 onPressed: dispatchRandom,
               ),

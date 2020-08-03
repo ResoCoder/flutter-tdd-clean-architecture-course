@@ -1,4 +1,5 @@
 import 'package:clean_architecture_tdd_course/features/number_trivia/domain/entities/number_trivia.dart';
+import 'package:clean_architecture_tdd_course/features/number_trivia/presentation/number_trivia_keys.dart';
 import 'package:flutter/material.dart';
 
 class TriviaDisplay extends StatelessWidget {
@@ -17,6 +18,7 @@ class TriviaDisplay extends StatelessWidget {
         children: <Widget>[
           Text(
             numberTrivia.number.toString(),
+            key: Key(NumberTriviaKeys.txtResultNumber),
             style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
           ),
           Expanded(
@@ -24,6 +26,7 @@ class TriviaDisplay extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Text(
                   numberTrivia.text,
+                  key: Key(NumberTriviaKeys.txtResultTrivia),
                   style: TextStyle(fontSize: 25),
                   textAlign: TextAlign.center,
                 ),
