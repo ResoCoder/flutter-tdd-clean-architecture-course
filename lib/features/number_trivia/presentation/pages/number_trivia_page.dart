@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../injection_container.dart';
-import '../number_trivia_keys.dart';
+import 'number_trivia_page_keys.dart';
 
 class NumberTriviaPage extends StatelessWidget {
-  NumberTriviaPage() : super(key: Key(NumberTriviaKeys.page));
+  NumberTriviaPage() : super(key: Key(NumberTriviaPageKeys.page));
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,5 +1,6 @@
 #!/bin/sh
 
+## script to trigger integration tests for each test file
 target='test_driver/app.dart'
 features='test_driver/features'
 

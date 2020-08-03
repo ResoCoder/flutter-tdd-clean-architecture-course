@@ -1,4 +1,4 @@
-class NumberTriviaKeys {
+class NumberTriviaPageKeys {
   static const page = 'page';
   static const txtFieldNumber = 'txtFieldNumber';
   static const btnGetNumberTrivia = 'btnGetNumberTrivia';

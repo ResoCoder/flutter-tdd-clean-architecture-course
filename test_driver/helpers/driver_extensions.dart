@@ -1,6 +1,7 @@
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:meta/meta.dart';
 
+/// methods to simplify identifying and interacting with known widgets
 extension FlutterDriverExtensions on FlutterDriver {
   SerializableFinder findByKey(String key) {
     return find.byValueKey(key);

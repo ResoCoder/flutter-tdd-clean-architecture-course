@@ -1,5 +1,5 @@
 // Imports the Flutter Driver API.
-import 'package:clean_architecture_tdd_course/features/number_trivia/presentation/number_trivia_keys.dart';
+import 'package:clean_architecture_tdd_course/features/number_trivia/presentation/pages/number_trivia_page_keys.dart';
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
@@ -26,7 +26,7 @@ void main() {
   });
 
   test('test launch', () async {
-    final numberTriviaPage = find.byValueKey(NumberTriviaKeys.page);
+    final numberTriviaPage = find.byValueKey(NumberTriviaPageKeys.page);
     await driver.waitFor(numberTriviaPage);
   });
 }

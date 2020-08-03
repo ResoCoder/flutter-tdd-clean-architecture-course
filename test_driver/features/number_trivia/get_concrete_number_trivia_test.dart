@@ -1,5 +1,5 @@
 // Imports the Flutter Driver API.
-import 'package:clean_architecture_tdd_course/features/number_trivia/presentation/number_trivia_keys.dart';
+import 'package:clean_architecture_tdd_course/features/number_trivia/presentation/pages/number_trivia_page_keys.dart';
 import 'package:flutter_driver/flutter_driver.dart';
 // import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
@@ -23,6 +23,8 @@ void main() {
     }
   });
 
+  // sends command to the flutter driver extension method to restart the app
+  // in-between each test
   setUp(() async {
     await driver.requestData(DriverCommand.restart.toString());
   });
@@ -34,17 +36,19 @@ void main() {
       '''should navigate the app and perform a valid concrete number trivia
          request''',
       () async {
-        driver.requestData("GET_CONCRETE_TRIVIA");
+        // driver.requestData("GET_CONCRETE_TRIVIA");
 
         await driver.type(
-            text: '$tNumber', textFieldKey: NumberTriviaKeys.txtFieldNumber);
+            text: '$tNumber',
+            textFieldKey: NumberTriviaPageKeys.txtFieldNumber);
 
-        await driver.tapOn(key: NumberTriviaKeys.btnGetNumberTrivia);
+        await driver.tapOn(key: NumberTriviaPageKeys.btnGetNumberTrivia);
 
-        await driver.waitOn(key: NumberTriviaKeys.txtResultNumber);
+        await driver.waitOn(key: NumberTriviaPageKeys.txtResultNumber);
 
         // capture result number text
-        var resultFinder = find.byValueKey(NumberTriviaKeys.txtResultNumber);
+        var resultFinder =
+            find.byValueKey(NumberTriviaPageKeys.txtResultNumber);
         String resultText = await driver.getText(resultFinder);
 
         expect(resultText, '$tNumber');
@@ -58,14 +62,16 @@ void main() {
         // driver.requestData("GET_CONCRETE_TRIVIA");
 
         await driver.type(
-            text: '$tNumber', textFieldKey: NumberTriviaKeys.txtFieldNumber);
+            text: '$tNumber',
+            textFieldKey: NumberTriviaPageKeys.txtFieldNumber);
 
-        await driver.tapOn(key: NumberTriviaKeys.btnGetNumberTrivia);
+        await driver.tapOn(key: NumberTriviaPageKeys.btnGetNumberTrivia);
 
-        await driver.waitOn(key: NumberTriviaKeys.txtResultNumber);
+        await driver.waitOn(key: NumberTriviaPageKeys.txtResultNumber);
 
         // capture result number text
-        var resultFinder = find.byValueKey(NumberTriviaKeys.txtResultNumber);
+        var resultFinder =
+            find.byValueKey(NumberTriviaPageKeys.txtResultNumber);
         String resultText = await driver.getText(resultFinder);
 
         expect(resultText, '$tNumber');

@@ -3,6 +3,7 @@ enum DriverCommand { restart, getConcreteNumberTrivia }
 class DriverHelper {
   static void getConcreteNumberTrivia() {}
 
+  /// attemps to convert a string to a [DriverCommand]
   static DriverCommand getDriverCommand(String commandString) {
     try {
       print(commandString);
