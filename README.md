@@ -28,7 +28,7 @@ Utilize Widget's key property to label important widgets of a page:
 
 Since we're referencing widgets by key, each page in the app should have a corresponding Keys class to make writing integration tests less painful and to avoid duplication and hard-coded strings across the production and test code.
 
-**Keys Class:** 
+**Keys Class:**
 *lib/features/number_trivia/presentation/pages/number_trivia_page_keys.dart*
 ~~~~
 class NumberTriviaPageKeys {
@@ -41,7 +41,7 @@ class NumberTriviaPageKeys {
 }
 ~~~~
 
-**Using Keys class in Widgets:** 
+**Using Keys class in Widgets:**
 *lib/features/number_trivia/presentation/widgets/trivia_controls.dart*
 ~~~~
 Expanded(
@@ -53,7 +53,8 @@ Expanded(
 ),
 ~~~~
 
-**Using Keys class in Integration Tests:** *test_driver/features/number_trivia/get_concrete_number_trivia_test.dart*
+**Using Keys class in Integration Tests:**
+*test_driver/features/number_trivia/get_concrete_number_trivia_test.dart*
 ~~~~
 ...
 var resultFinder = find.byValueKey(NumberTriviaPageKeys.txtResultNumber);
