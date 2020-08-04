@@ -8,5 +8,8 @@ files=$(find $features -maxdepth 3 -type f);
 for file in $files
   do
   echo $file
-  flutter drive --target=$target --driver=$file
+
+  # --no-build is to speed up the tests.
+  # TODO: specify devices
+  flutter drive --no-build --target=$target --driver=$file
 done;
