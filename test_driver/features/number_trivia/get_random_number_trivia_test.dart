@@ -1,9 +1,10 @@
 // Imports the Flutter Driver API.
+import 'package:clean_architecture_tdd_course/features/number_trivia/presentation/pages/number_trivia_page_keys.dart';
+import 'package:clean_architecture_tdd_course/mock/driver_command.dart';
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 
 import '../../helpers/driver_extensions.dart';
-import '../../helpers/driver_helper.dart';
 
 void main() {
   FlutterDriver driver;
@@ -24,8 +25,16 @@ void main() {
     await driver.requestData(DriverCommand.restart.toString());
   });
 
-  test('test random number trivia', () async {
-    driver.delay(5);
-    expect(true, true);
-  });
+  test(
+    '''should navigate the app and perform a valid random number trivia
+         request''',
+    () async {
+      await driver.requestData(DriverCommand.getRandomNumberSuccess.toString());
+
+      await driver.tapOn(key: NumberTriviaPageKeys.btnGetRandomNumberTrivia);
+
+      // capture result number text
+      await driver.waitOn(key: NumberTriviaPageKeys.txtResultNumber);
+    },
+  );
 }

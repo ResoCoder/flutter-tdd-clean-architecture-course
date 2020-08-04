@@ -1,3 +1,4 @@
+import 'package:clean_architecture_tdd_course/features/number_trivia/presentation/pages/number_trivia_page_keys.dart';
 import 'package:flutter/material.dart';
 
 class MessageDisplay extends StatelessWidget {
@@ -16,6 +17,7 @@ class MessageDisplay extends StatelessWidget {
         child: SingleChildScrollView(
           child: Text(
             message,
+            key: Key(NumberTriviaPageKeys.txtMessageDisplay),
             style: TextStyle(fontSize: 25),
             textAlign: TextAlign.center,
           ),

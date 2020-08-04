@@ -1,12 +1,12 @@
 // Imports the Flutter Driver API.
 import 'package:clean_architecture_tdd_course/features/number_trivia/presentation/pages/number_trivia_page_keys.dart';
+import 'package:clean_architecture_tdd_course/mock/driver_command.dart';
 import 'package:flutter_driver/flutter_driver.dart';
 // import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 // import 'package:http/http.dart' as http;
 
 import '../../helpers/driver_extensions.dart';
-import '../../helpers/driver_helper.dart';
 
 void main() {
   FlutterDriver driver;
@@ -36,7 +36,8 @@ void main() {
       '''should navigate the app and perform a valid concrete number trivia
          request''',
       () async {
-        // driver.requestData("GET_CONCRETE_TRIVIA");
+        await driver
+            .requestData(DriverCommand.getConcreteNumberSuccess.toString());
 
         await driver.type(
             text: '$tNumber',
@@ -44,37 +45,28 @@ void main() {
 
         await driver.tapOn(key: NumberTriviaPageKeys.btnGetNumberTrivia);
 
-        await driver.waitOn(key: NumberTriviaPageKeys.txtResultNumber);
-
         // capture result number text
-        var resultFinder =
-            find.byValueKey(NumberTriviaPageKeys.txtResultNumber);
-        String resultText = await driver.getText(resultFinder);
-
+        String resultText =
+            await driver.getTextFrom(key: NumberTriviaPageKeys.txtResultNumber);
         expect(resultText, '$tNumber');
       },
     );
 
     test(
-      '''X2 should navigate the app and perform a valid concrete number trivia
+      '''X2 should navigate the app and perform an invalid concrete number trivia
          request''',
       () async {
-        // driver.requestData("GET_CONCRETE_TRIVIA");
-
         await driver.type(
-            text: '$tNumber',
-            textFieldKey: NumberTriviaPageKeys.txtFieldNumber);
+            text: '-1', textFieldKey: NumberTriviaPageKeys.txtFieldNumber);
 
         await driver.tapOn(key: NumberTriviaPageKeys.btnGetNumberTrivia);
 
-        await driver.waitOn(key: NumberTriviaPageKeys.txtResultNumber);
-
         // capture result number text
-        var resultFinder =
-            find.byValueKey(NumberTriviaPageKeys.txtResultNumber);
-        String resultText = await driver.getText(resultFinder);
+        String resultText = await driver.getTextFrom(
+            key: NumberTriviaPageKeys.txtMessageDisplay);
 
-        expect(resultText, '$tNumber');
+        bool didSucceed = resultText.contains('Invalid Input');
+        expect(true, didSucceed);
       },
     );
   });

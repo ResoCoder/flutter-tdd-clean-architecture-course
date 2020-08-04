@@ -5,4 +5,5 @@ class NumberTriviaPageKeys {
   static const btnGetRandomNumberTrivia = 'btnGetRandomNumberTrivia';
   static const txtResultNumber = 'txtResultNumber';
   static const txtResultTrivia = 'txtResultTrivia';
+  static const txtMessageDisplay = 'txtMessageDisplay';
 }

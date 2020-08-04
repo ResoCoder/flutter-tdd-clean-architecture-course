@@ -1,14 +1,31 @@
+import 'package:clean_architecture_tdd_course/mock/command_mocker.dart';
 import 'package:flutter/material.dart';
 import 'features/number_trivia/presentation/pages/number_trivia_page.dart';
 import 'injection_container.dart' as di;
+import 'mock/driver_command.dart';
 
-enum EnvironmentType { dev, prod, mock }
+enum EnvironmentType { prod, mock }
 
-void main({Key key, EnvironmentType environment = EnvironmentType.prod}) async {
+/// [EnvironmentType] is to determine which dependencies are to be initialized: actual vs mocked
+/// [DriverCommand] determines how and which service calls will be mocked when running the mock environment
+void main({
+  Key key,
+  EnvironmentType environment = EnvironmentType.prod,
+  DriverCommand command,
+}) async {
   WidgetsFlutterBinding.ensureInitialized();
 
   di.sl.reset();
-  await di.init(environment: environment);
+
+  switch (environment) {
+    case EnvironmentType.prod:
+      await di.init();
+      break;
+    case EnvironmentType.mock:
+      await di.initMock();
+      CommandMocker.mock(command: command);
+      break;
+  }
 
   runApp(MyApp(key: key));
 }

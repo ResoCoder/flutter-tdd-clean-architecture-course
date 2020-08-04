@@ -7,6 +7,18 @@ extension FlutterDriverExtensions on FlutterDriver {
     return find.byValueKey(key);
   }
 
+  SerializableFinder findByType(Type type) {
+    return find.byType(type.toString());
+  }
+
+  SerializableFinder findBySemanticsLabel(Pattern pattern) {
+    return find.bySemanticsLabel(type.toString());
+  }
+
+  SerializableFinder findByTooltip(String message) {
+    return find.byTooltip(message);
+  }
+
   Future<void> type(
       {@required String text, @required String textFieldKey}) async {
     var textField = findByKey(textFieldKey);
@@ -25,6 +37,12 @@ extension FlutterDriverExtensions on FlutterDriver {
 
   Future<void> waitOn({@required String key}) async {
     var widget = findByKey(key);
+    print('waiting for $key');
     await this.waitFor(widget);
+  }
+
+  Future<String> getTextFrom({@required String key}) async {
+    var resultFinder = find.byValueKey(key);
+    return await getText(resultFinder);
   }
 }
