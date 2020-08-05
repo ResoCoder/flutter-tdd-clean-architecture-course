@@ -11,5 +11,5 @@ for file in $files
 
   # --no-build is to speed up the tests.
   # TODO: specify devices
-  flutter drive --no-build --target=$target --driver=$file
+  flutter drive --target=$target --driver=$file
 done;
