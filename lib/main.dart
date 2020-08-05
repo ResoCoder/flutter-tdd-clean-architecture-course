@@ -4,13 +4,12 @@ import 'features/number_trivia/presentation/pages/number_trivia_page.dart';
 import 'injection_container.dart' as di;
 import 'mock/driver_command.dart';
 
-enum EnvironmentType { prod, mock }
+enum Environment { prod, mock }
 
 /// [EnvironmentType] is to determine which dependencies are to be initialized: actual vs mocked
 /// [DriverCommand] determines how and which service calls will be mocked when running the mock environment
-void main({
-  Key key,
-  EnvironmentType environment = EnvironmentType.prod,
+Future<void> main({
+  Environment environment = Environment.prod,
   DriverCommand command,
 }) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,16 +17,16 @@ void main({
   di.sl.reset();
 
   switch (environment) {
-    case EnvironmentType.prod:
+    case Environment.prod:
       await di.init();
       break;
-    case EnvironmentType.mock:
+    case Environment.mock:
       await di.initMock();
       CommandMocker.mock(command: command);
       break;
   }
 
-  runApp(MyApp(key: key));
+  runApp(MyApp(key: UniqueKey()));
 }
 
 class MyApp extends StatelessWidget {

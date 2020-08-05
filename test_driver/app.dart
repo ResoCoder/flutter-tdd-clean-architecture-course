@@ -1,7 +1,5 @@
 // project-specific imports
 import 'package:clean_architecture_tdd_course/main.dart' as app;
-import 'package:clean_architecture_tdd_course/mock/driver_command.dart';
-import 'package:flutter/widgets.dart';
 import 'helpers/driver_helper.dart';
 
 // flutter-specific imports
@@ -11,7 +9,6 @@ void main() async {
   Future<String> dataHandler(String commandString) async {
     var command = DriverHelper.getDriverCommand(commandString);
     app.main(
-      key: UniqueKey(),
       environment: app.EnvironmentType.mock,
       command: command,
     );

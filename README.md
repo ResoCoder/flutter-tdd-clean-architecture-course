@@ -92,9 +92,32 @@ void  main() async {
 ~~~~
 
 ## Mocking
-WIP
+The goal is to provide the ability to easily specify whether mocked or actual services are to be used when executing integration tests. Also, when mocking, to utilize Mockito to simplify mocking of various services and dependencies.
+
+To specify the type of environment, we added an argument to the app's main method.
+
+For mocking, the **DriverCommand** argument was added to determines how and which service calls will be mocked when running the mock environment. When the driver application receives a command, that command can be passed to the source app, triggering any mocked service calls using combination of dependency injection and mockito.
+
+*source app main method*
+~~~~
+enum Environment { prod, mock }
+
+/// [Environment] is to determine which dependencies are to be initialized: actual vs mocked
+/// [DriverCommand] determines how and which service calls will be mocked when running the mock environment
+void main({
+  Environment environment = Environment.prod,
+  DriverCommand command,
+}) async {
+  ...
+}
+~~~~
+
+
 
 ## Integration Tests Results
+### Test Results
+WIP
+
 ### Screenshots
 WIP
 
