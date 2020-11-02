@@ -49,7 +49,7 @@ void main() {
         // act
         final call = dataSource.getLastNumberTrivia;
         // assert
-        expect(() => call(), throwsA(TypeMatcher<CacheException>()));
+        expect(() => call(), throwsA(isInstanceOf<CacheException>()));
       },
     );
   });
