@@ -11,6 +11,7 @@ import 'features/number_trivia/data/repositories/number_trivia_repository_impl.d
 import 'features/number_trivia/domain/repositories/number_trivia_repository.dart';
 import 'features/number_trivia/domain/usecases/get_concrete_number_trivia.dart';
 import 'features/number_trivia/domain/usecases/get_random_number_trivia.dart';
+import 'features/number_trivia/domain/usecases/get_year_number_trivia.dart';
 import 'features/number_trivia/presentation/bloc/number_trivia_bloc.dart';
 
 final sl = GetIt.instance;
@@ -23,12 +24,14 @@ Future<void> init() async {
       concrete: sl(),
       inputConverter: sl(),
       random: sl(),
+      yearNum: sl(),
     ),
   );
 
   // Use cases
   sl.registerLazySingleton(() => GetConcreteNumberTrivia(sl()));
   sl.registerLazySingleton(() => GetRandomNumberTrivia(sl()));
+  sl.registerLazySingleton(() => GetYearNumberTrivia(sl()));
 
   // Repository
   sl.registerLazySingleton<NumberTriviaRepository>(

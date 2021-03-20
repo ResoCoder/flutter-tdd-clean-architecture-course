@@ -52,7 +52,15 @@ class _TriviaControlsState extends State<TriviaControls> {
               ),
             ),
           ],
-        )
+        ),
+        SizedBox(height: 10),
+        // ignore: deprecated_member_use
+        RaisedButton(
+          child: Text('Year Trivil'),
+          color: Theme.of(context).accentColor,
+          textTheme: ButtonTextTheme.primary,
+          onPressed: dispatchYearNum,
+        ),
       ],
     );
   }
@@ -66,5 +74,12 @@ class _TriviaControlsState extends State<TriviaControls> {
   void dispatchRandom() {
     controller.clear();
     BlocProvider.of<NumberTriviaBloc>(context).add(GetTriviaForRandomNumber());
+  }
+
+// fun to send request for year trivia
+  void dispatchYearNum() {
+    controller.clear();
+    BlocProvider.of<NumberTriviaBloc>(context)
+        .add(GetTriviaForYearNumber(inputStr));
   }
 }
