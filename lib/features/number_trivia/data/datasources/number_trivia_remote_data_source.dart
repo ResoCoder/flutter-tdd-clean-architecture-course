@@ -12,6 +12,11 @@ abstract class NumberTriviaRemoteDataSource {
   /// Throws a [ServerException] for all error codes.
   Future<NumberTriviaModel> getConcreteNumberTrivia(int number);
 
+  /// Calls the http://numbersapi.com/{number}/year endpoint.
+  ///
+  /// Throws a [ServerException] for all error codes.
+  Future<NumberTriviaModel> getYearNumberTrivia(int number);
+
   /// Calls the http://numbersapi.com/random endpoint.
   ///
   /// Throws a [ServerException] for all error codes.
@@ -31,8 +36,13 @@ class NumberTriviaRemoteDataSourceImpl implements NumberTriviaRemoteDataSource {
   Future<NumberTriviaModel> getRandomNumberTrivia() =>
       _getTriviaFromUrl('http://numbersapi.com/random');
 
+  // this my request
+  @override
+  Future<NumberTriviaModel> getYearNumberTrivia(int number) =>
+      _getTriviaFromUrl('http://numbersapi.com/$number/year');
+
   Future<NumberTriviaModel> _getTriviaFromUrl(String url) async {
-    final response = await client.get(
+    final response = await http.get(
       url,
       headers: {
         'Content-Type': 'application/json',

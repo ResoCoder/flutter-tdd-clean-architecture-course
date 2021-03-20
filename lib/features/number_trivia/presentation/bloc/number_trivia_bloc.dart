@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:clean_architecture_tdd_course/core/error/failures.dart';
 import 'package:clean_architecture_tdd_course/core/usecases/usecase.dart';
 import 'package:clean_architecture_tdd_course/features/number_trivia/domain/entities/number_trivia.dart';
+import 'package:clean_architecture_tdd_course/features/number_trivia/domain/usecases/get_year_number_trivia.dart';
 import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
 
@@ -20,17 +21,21 @@ const String INVALID_INPUT_FAILURE_MESSAGE =
 class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
   final GetConcreteNumberTrivia getConcreteNumberTrivia;
   final GetRandomNumberTrivia getRandomNumberTrivia;
+  final GetYearNumberTrivia getYearNumberTrivia;
   final InputConverter inputConverter;
 
   NumberTriviaBloc({
     @required GetConcreteNumberTrivia concrete,
     @required GetRandomNumberTrivia random,
+    @required GetYearNumberTrivia yearNum,
     @required this.inputConverter,
   })  : assert(concrete != null),
         assert(random != null),
+        assert(yearNum != null),
         assert(inputConverter != null),
         getConcreteNumberTrivia = concrete,
-        getRandomNumberTrivia = random;
+        getRandomNumberTrivia = random,
+        getYearNumberTrivia = yearNum;
 
   @override
   NumberTriviaState get initialState => Empty();
@@ -58,6 +63,22 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
       yield Loading();
       final failureOrTrivia = await getRandomNumberTrivia(NoParams());
       yield* _eitherLoadedOrErrorState(failureOrTrivia);
+      //  trigger my event to make request
+    } else if (event is GetTriviaForYearNumber) {
+      final inputEither =
+          inputConverter.stringToUnsignedInteger(event.numberString);
+
+      yield* inputEither.fold(
+        (failure) async* {
+          yield Error(message: INVALID_INPUT_FAILURE_MESSAGE);
+        },
+        (integer) async* {
+          yield Loading();
+          final failureOrTrivia =
+              await getYearNumberTrivia(YearTrivia(number: integer));
+          yield* _eitherLoadedOrErrorState(failureOrTrivia);
+        },
+      );
     }
   }
 
