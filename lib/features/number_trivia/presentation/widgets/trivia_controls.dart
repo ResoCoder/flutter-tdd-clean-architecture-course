@@ -76,7 +76,7 @@ class _TriviaControlsState extends State<TriviaControls> {
     BlocProvider.of<NumberTriviaBloc>(context).add(GetTriviaForRandomNumber());
   }
 
-// fun to send request
+// fun to send request for year trivia
   void dispatchYearNum() {
     controller.clear();
     BlocProvider.of<NumberTriviaBloc>(context)

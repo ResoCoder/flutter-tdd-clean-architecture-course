@@ -63,7 +63,7 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
       yield Loading();
       final failureOrTrivia = await getRandomNumberTrivia(NoParams());
       yield* _eitherLoadedOrErrorState(failureOrTrivia);
-      //  trigger my event to make request
+      //  trigger my event to make request for yaer trivia
     } else if (event is GetTriviaForYearNumber) {
       final inputEither =
           inputConverter.stringToUnsignedInteger(event.numberString);

@@ -7,7 +7,7 @@ import '../../../../core/usecases/usecase.dart';
 import '../entities/number_trivia.dart';
 import '../repositories/number_trivia_repository.dart';
 
-//  new useCase
+//  new useCase year trivia
 
 class GetYearNumberTrivia implements UseCase<NumberTrivia, YearTrivia> {
   final NumberTriviaRepository repository;
