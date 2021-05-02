@@ -44,6 +44,7 @@ class NumberTriviaPage extends StatelessWidget {
                       message: state.message,
                     );
                   }
+                  return null;
                 },
               ),
               SizedBox(height: 20),
