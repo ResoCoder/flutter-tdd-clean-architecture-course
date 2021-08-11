@@ -21,7 +21,7 @@ abstract class NumberTriviaRemoteDataSource {
 class NumberTriviaRemoteDataSourceImpl implements NumberTriviaRemoteDataSource {
   final http.Client client;
 
-  NumberTriviaRemoteDataSourceImpl({@required this.client});
+  NumberTriviaRemoteDataSourceImpl({required this.client});
 
   @override
   Future<NumberTriviaModel> getConcreteNumberTrivia(int number) =>
@@ -33,7 +33,7 @@ class NumberTriviaRemoteDataSourceImpl implements NumberTriviaRemoteDataSource {
 
   Future<NumberTriviaModel> _getTriviaFromUrl(String url) async {
     final response = await client.get(
-      url,
+      Uri.parse(url),
       headers: {
         'Content-Type': 'application/json',
       },

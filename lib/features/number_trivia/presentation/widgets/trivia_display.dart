@@ -5,8 +5,8 @@ class TriviaDisplay extends StatelessWidget {
   final NumberTrivia numberTrivia;
 
   const TriviaDisplay({
-    Key key,
-    @required this.numberTrivia,
+    Key? key,
+    required this.numberTrivia,
   }) : super(key: key);
 
   @override

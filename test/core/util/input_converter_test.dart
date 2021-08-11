@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  InputConverter inputConverter;
+  late InputConverter inputConverter;
 
   setUp(() {
     inputConverter = InputConverter();
