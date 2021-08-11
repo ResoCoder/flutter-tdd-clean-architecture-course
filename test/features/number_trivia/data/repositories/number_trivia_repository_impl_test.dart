@@ -20,11 +20,8 @@ import 'number_trivia_repository_impl_test.mocks.dart';
 
 // class MockNetworkInfo extends Mock implements  {}
 
-@GenerateMocks([
-  NumberTriviaRemoteDataSource,
-  NumberTriviaLocalDataSource,
-  NetworkInfo,
-])
+@GenerateMocks(
+    [NumberTriviaLocalDataSource, NetworkInfo, NumberTriviaRemoteDataSource])
 void main() {
   late NumberTriviaRepositoryImpl repository;
   late MockNumberTriviaRemoteDataSource mockRemoteDataSource;

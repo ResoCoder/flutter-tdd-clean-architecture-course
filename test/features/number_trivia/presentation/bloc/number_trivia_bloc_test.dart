@@ -2,6 +2,7 @@ import 'package:clean_architecture_tdd_course/core/error/failures.dart';
 import 'package:clean_architecture_tdd_course/core/usecases/usecase.dart';
 import 'package:clean_architecture_tdd_course/core/util/input_converter.dart';
 import 'package:clean_architecture_tdd_course/features/number_trivia/domain/entities/number_trivia.dart';
+import 'package:clean_architecture_tdd_course/features/number_trivia/domain/repositories/number_trivia_repository.dart';
 import 'package:clean_architecture_tdd_course/features/number_trivia/domain/usecases/get_concrete_number_trivia.dart';
 import 'package:clean_architecture_tdd_course/features/number_trivia/domain/usecases/get_random_number_trivia.dart';
 import 'package:clean_architecture_tdd_course/features/number_trivia/presentation/bloc/bloc.dart';
@@ -13,20 +14,24 @@ import 'package:mockito/annotations.dart';
 import 'number_trivia_bloc_test.mocks.dart';
 
 @GenerateMocks([
+  NumberTriviaRepository,
   GetConcreteNumberTrivia,
   GetRandomNumberTrivia,
   InputConverter,
 ])
 void main() {
   late NumberTriviaBloc bloc;
+
   late MockGetConcreteNumberTrivia mockGetConcreteNumberTrivia;
   late MockGetRandomNumberTrivia mockGetRandomNumberTrivia;
   late MockInputConverter mockInputConverter;
+  late MockNumberTriviaRepository mockNumberTriviaRepository;
 
   setUp(() {
     mockGetConcreteNumberTrivia = MockGetConcreteNumberTrivia();
     mockGetRandomNumberTrivia = MockGetRandomNumberTrivia();
     mockInputConverter = MockInputConverter();
+    mockNumberTriviaRepository = MockNumberTriviaRepository();
 
     bloc = NumberTriviaBloc(
       concrete: mockGetConcreteNumberTrivia,
@@ -54,6 +59,19 @@ void main() {
       () async {
         // arrange
         setUpMockInputConverterSuccess();
+
+        when(mockNumberTriviaRepository.getConcreteNumberTrivia(any))
+            .thenAnswer((_) async => Right(tNumberTrivia));
+
+        when(mockNumberTriviaRepository.getRandomNumberTrivia())
+            .thenAnswer((_) async => Right(tNumberTrivia));
+
+        when(mockGetConcreteNumberTrivia.call(any)).thenAnswer((_) async =>
+            mockNumberTriviaRepository.getConcreteNumberTrivia(tNumberParsed));
+
+        when(mockGetRandomNumberTrivia.call(any)).thenAnswer(
+            (_) async => mockNumberTriviaRepository.getRandomNumberTrivia());
+
         // act
         bloc.add(GetTriviaForConcreteNumber(tNumberString));
         await untilCalled(mockInputConverter.stringToUnsignedInteger(any));
