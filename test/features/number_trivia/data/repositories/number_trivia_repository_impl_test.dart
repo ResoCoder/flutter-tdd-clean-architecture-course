@@ -72,6 +72,10 @@ void main() {
       'should check if the device is online',
       () async {
         // arrange
+        when(mockLocalDataSource.cacheNumberTrivia(any))
+            .thenAnswer((_) async => false);
+        when(mockRemoteDataSource.getConcreteNumberTrivia(any))
+            .thenAnswer((_) async => tNumberTriviaModel);
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
         // act
         repository.getConcreteNumberTrivia(tNumber);
@@ -87,6 +91,8 @@ void main() {
           // arrange
           when(mockRemoteDataSource.getConcreteNumberTrivia(any))
               .thenAnswer((_) async => tNumberTriviaModel);
+          when(mockLocalDataSource.cacheNumberTrivia(any))
+              .thenAnswer((_) async => false);
           // act
           final result = await repository.getConcreteNumberTrivia(tNumber);
           // assert
@@ -101,6 +107,8 @@ void main() {
           // arrange
           when(mockRemoteDataSource.getConcreteNumberTrivia(any))
               .thenAnswer((_) async => tNumberTriviaModel);
+          when(mockLocalDataSource.cacheNumberTrivia(any))
+              .thenAnswer((_) async => false);
           // act
           await repository.getConcreteNumberTrivia(tNumber);
           // assert
@@ -205,6 +213,8 @@ void main() {
           // arrange
           when(mockRemoteDataSource.getRandomNumberTrivia())
               .thenAnswer((_) async => tNumberTriviaModel);
+          when(mockLocalDataSource.cacheNumberTrivia(any))
+              .thenAnswer((_) async => false);
           // act
           await repository.getRandomNumberTrivia();
           // assert
