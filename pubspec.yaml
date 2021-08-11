@@ -10,24 +10,24 @@ dependencies:
   flutter:
     sdk: flutter
   # Service locator
-  get_it: ^3.1.0
+  get_it: ^7.2.0
   # Bloc for state management
-  flutter_bloc: ^3.0.0
+  flutter_bloc: ^7.1.0
   # Value equality
-  equatable: ^1.0.1
+  equatable: ^2.0.3
   # Functional programming thingies
-  dartz: ^0.8.9
+  dartz: ^0.10.0-nullsafety.2
   # Remote API
   data_connection_checker: ^0.3.4
-  http: ^0.12.0+3
+  http: ^0.13.3
   # Local cache
-  shared_preferences: ^0.5.6
+  shared_preferences: ^2.0.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mockito: ^5.0.7
-  build_runner: ^1.12.2
+  mockito: ^5.0.14
+  build_runner: ^2.1.1
 
 flutter:
   uses-material-design: true
