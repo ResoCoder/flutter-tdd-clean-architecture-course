@@ -8,14 +8,15 @@ import 'package:clean_architecture_tdd_course/features/number_trivia/presentatio
 import 'package:dartz/dartz.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 
-class MockGetConcreteNumberTrivia extends Mock
-    implements GetConcreteNumberTrivia {}
+import 'number_trivia_bloc_test.mocks.dart';
 
-class MockGetRandomNumberTrivia extends Mock implements GetRandomNumberTrivia {}
-
-class MockInputConverter extends Mock implements InputConverter {}
-
+@GenerateMocks([
+  GetConcreteNumberTrivia,
+  GetRandomNumberTrivia,
+  InputConverter,
+])
 void main() {
   late NumberTriviaBloc bloc;
   late MockGetConcreteNumberTrivia mockGetConcreteNumberTrivia;
