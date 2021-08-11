@@ -189,6 +189,8 @@ void main() {
           // arrange
           when(mockRemoteDataSource.getRandomNumberTrivia())
               .thenAnswer((_) async => tNumberTriviaModel);
+          when(mockLocalDataSource.cacheNumberTrivia(any))
+              .thenAnswer((_) async => false);
           // act
           final result = await repository.getRandomNumberTrivia();
           // assert

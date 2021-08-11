@@ -5,11 +5,11 @@
 import 'dart:async' as _i4;
 
 import 'package:clean_architecture_tdd_course/core/network/network_info.dart'
-    as _i5;
+    as _i6;
 import 'package:clean_architecture_tdd_course/features/number_trivia/data/datasources/number_trivia_local_data_source.dart'
     as _i3;
 import 'package:clean_architecture_tdd_course/features/number_trivia/data/datasources/number_trivia_remote_data_source.dart'
-    as _i6;
+    as _i5;
 import 'package:clean_architecture_tdd_course/features/number_trivia/data/models/number_trivia_model.dart'
     as _i2;
 import 'package:mockito/mockito.dart' as _i1;
@@ -49,27 +49,11 @@ class MockNumberTriviaLocalDataSource extends _i1.Mock
   String toString() => super.toString();
 }
 
-/// A class which mocks [NetworkInfo].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockNetworkInfo extends _i1.Mock implements _i5.NetworkInfo {
-  MockNetworkInfo() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i4.Future<bool> get isConnected =>
-      (super.noSuchMethod(Invocation.getter(#isConnected),
-          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
-  @override
-  String toString() => super.toString();
-}
-
 /// A class which mocks [NumberTriviaRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockNumberTriviaRemoteDataSource extends _i1.Mock
-    implements _i6.NumberTriviaRemoteDataSource {
+    implements _i5.NumberTriviaRemoteDataSource {
   MockNumberTriviaRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
@@ -86,6 +70,22 @@ class MockNumberTriviaRemoteDataSource extends _i1.Mock
               returnValue: Future<_i2.NumberTriviaModel>.value(
                   _FakeNumberTriviaModel_0()))
           as _i4.Future<_i2.NumberTriviaModel>);
+  @override
+  String toString() => super.toString();
+}
+
+/// A class which mocks [NetworkInfo].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockNetworkInfo extends _i1.Mock implements _i6.NetworkInfo {
+  MockNetworkInfo() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<bool> get isConnected =>
+      (super.noSuchMethod(Invocation.getter(#isConnected),
+          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
   @override
   String toString() => super.toString();
 }
