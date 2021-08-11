@@ -5,7 +5,7 @@ class MessageDisplay extends StatelessWidget {
 
   const MessageDisplay({
     Key key,
-    @required this.message,
+    required this.message,
   }) : super(key: key);
 
   @override
