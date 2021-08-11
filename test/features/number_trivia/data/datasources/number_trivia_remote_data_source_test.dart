@@ -96,7 +96,7 @@ void main() {
         dataSource.getRandomNumberTrivia();
         // assert
         verify(mockHttpClient.get(
-          'http://numbersapi.com/random',
+          Uri.parse('http://numbersapi.com/random'),
           headers: {
             'Content-Type': 'application/json',
           },

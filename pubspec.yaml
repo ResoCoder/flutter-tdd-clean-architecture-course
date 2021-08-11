@@ -18,7 +18,7 @@ dependencies:
   # Functional programming thingies
   dartz: ^0.10.0-nullsafety.2
   # Remote API
-  data_connection_checker: ^0.3.4
+  connectivity_plus: ^1.0.6
   http: ^0.13.3
   # Local cache
   shared_preferences: ^2.0.6
