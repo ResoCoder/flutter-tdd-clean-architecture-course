@@ -37,16 +37,15 @@ class _TriviaControlsState extends State<TriviaControls> {
         Row(
           children: <Widget>[
             Expanded(
-              child: RaisedButton(
-                child: Text('Search'),
-                color: Theme.of(context).accentColor,
-                textTheme: ButtonTextTheme.primary,
+              child: ElevatedButton(
+                child: Text('Search',
+                    style: TextStyle(backgroundColor: Colors.blue)),
                 onPressed: dispatchConcrete,
               ),
             ),
             SizedBox(width: 10),
             Expanded(
-              child: RaisedButton(
+              child: ElevatedButton(
                 child: Text('Get random trivia'),
                 onPressed: dispatchRandom,
               ),
