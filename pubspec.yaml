@@ -4,7 +4,7 @@ description: TDD Clean Architecture for Flutter
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.6.0 <3.0.0'
+  sdk: '>=2.19.0-302.0.dev <3.0.0'
 
 dependencies:
   flutter:
@@ -12,16 +12,16 @@ dependencies:
   # Service locator
   get_it: ^3.1.0
   # Bloc for state management
-  flutter_bloc: ^3.0.0
+  flutter_bloc: ^8.1.2
   # Value equality
-  equatable: ^1.0.1
+  equatable: ^2.0.5
   # Functional programming thingies
-  dartz: ^0.8.9
+  dartz: ^0.10.1
   # Remote API
   data_connection_checker: ^0.3.4
-  http: ^0.12.0+3
+  http: ^0.13.5
   # Local cache
-  shared_preferences: ^0.5.6
+  shared_preferences: ^2.0.18
 
 dev_dependencies:
   flutter_test:
