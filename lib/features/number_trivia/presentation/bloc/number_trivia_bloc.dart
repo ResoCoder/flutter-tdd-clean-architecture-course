@@ -5,7 +5,6 @@ import 'package:clean_architecture_tdd_course/core/error/failures.dart';
 import 'package:clean_architecture_tdd_course/core/usecases/usecase.dart';
 import 'package:clean_architecture_tdd_course/features/number_trivia/domain/entities/number_trivia.dart';
 import 'package:dartz/dartz.dart';
-import 'package:meta/meta.dart';
 
 import './bloc.dart';
 import '../../../../core/util/input_converter.dart';
@@ -23,19 +22,11 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
   final InputConverter inputConverter;
 
   NumberTriviaBloc({
-    @required GetConcreteNumberTrivia concrete,
-    @required GetRandomNumberTrivia random,
-    @required this.inputConverter,
-  })  : assert(concrete != null),
-        assert(random != null),
-        assert(inputConverter != null),
-        getConcreteNumberTrivia = concrete,
-        getRandomNumberTrivia = random;
-
-  @override
-  NumberTriviaState get initialState => Empty();
-
-  @override
+    required this.getConcreteNumberTrivia,
+    required this.getRandomNumberTrivia,
+    required this.inputConverter,
+  }) : super(Empty());
+  
   Stream<NumberTriviaState> mapEventToState(
     NumberTriviaEvent event,
   ) async* {
