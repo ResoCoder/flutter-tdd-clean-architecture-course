@@ -1,13 +1,16 @@
 import 'package:clean_architecture_tdd_course/core/network/network_info.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 
-class MockDataConnectionChecker extends Mock implements DataConnectionChecker {}
+import 'network_info_test.mocks.dart';
+
+@GenerateNiceMocks([MockSpec<DataConnectionChecker>()])
 
 void main() {
-  NetworkInfoImpl networkInfo;
-  MockDataConnectionChecker mockDataConnectionChecker;
+  late NetworkInfoImpl networkInfo;
+  late MockDataConnectionChecker mockDataConnectionChecker;
 
   setUp(() {
     mockDataConnectionChecker = MockDataConnectionChecker();
