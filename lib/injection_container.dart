@@ -20,9 +20,9 @@ Future<void> init() async {
   // Bloc
   sl.registerFactory(
     () => NumberTriviaBloc(
-      concrete: sl(),
+      getConcreteNumberTrivia: sl(),
       inputConverter: sl(),
-      random: sl(),
+      getRandomNumberTrivia: sl(),
     ),
   );
 
