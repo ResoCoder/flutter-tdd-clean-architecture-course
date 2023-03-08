@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TriviaControls extends StatefulWidget {
   const TriviaControls({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

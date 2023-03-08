@@ -4,7 +4,7 @@ class MessageDisplay extends StatelessWidget {
   final String message;
 
   const MessageDisplay({
-    Key key,
+    Key? key,
     required this.message,
   }) : super(key: key);
 

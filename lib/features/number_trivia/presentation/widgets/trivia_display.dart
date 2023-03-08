@@ -5,7 +5,7 @@ class TriviaDisplay extends StatelessWidget {
   final NumberTrivia numberTrivia;
 
   const TriviaDisplay({
-    Key key,
+    Key? key,
     required this.numberTrivia,
   }) : super(key: key);
 
