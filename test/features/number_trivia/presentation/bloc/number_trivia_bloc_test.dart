@@ -25,15 +25,15 @@ void main() {
     mockInputConverter = MockInputConverter();
 
     bloc = NumberTriviaBloc(
-      concrete: mockGetConcreteNumberTrivia,
-      random: mockGetRandomNumberTrivia,
+      getConcreteNumberTrivia: mockGetConcreteNumberTrivia,
+      getRandomNumberTrivia: mockGetRandomNumberTrivia,
       inputConverter: mockInputConverter,
     );
   });
 
   test('initialState should be Empty', () {
     // assert
-    expect(bloc.initialState, equals(Empty()));
+    expect(bloc.state, equals(Empty()));
   });
 
   group('GetTriviaForConcreteNumber', () {
