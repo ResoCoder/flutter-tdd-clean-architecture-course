@@ -13,12 +13,13 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'number_trivia_repository_impl_test.mocks.dart';
 
-@GenerateMocks([NumberTriviaRemoteDataSource,NumberTriviaLocalDataSource,NetworkInfo])
+@GenerateMocks(
+    [NumberTriviaRemoteDataSource, NumberTriviaLocalDataSource, NetworkInfo])
 void main() {
- late NumberTriviaRepositoryImpl repository;
- late MockNumberTriviaRemoteDataSource mockRemoteDataSource;
- late MockNumberTriviaLocalDataSource mockLocalDataSource;
- late MockNetworkInfo mockNetworkInfo;
+  late NumberTriviaRepositoryImpl repository;
+  late MockNumberTriviaRemoteDataSource mockRemoteDataSource;
+  late MockNumberTriviaLocalDataSource mockLocalDataSource;
+  late MockNetworkInfo mockNetworkInfo;
 
   setUp(() {
     mockRemoteDataSource = MockNumberTriviaRemoteDataSource();
@@ -62,6 +63,8 @@ void main() {
       () async {
         // arrange
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+        when(mockRemoteDataSource.getConcreteNumberTrivia(any))
+            .thenAnswer((_) async => tNumberTriviaModel);
         // act
         repository.getConcreteNumberTrivia(tNumber);
         // assert
@@ -157,6 +160,8 @@ void main() {
       () async {
         // arrange
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+        when(mockRemoteDataSource.getRandomNumberTrivia())
+            .thenAnswer((_) async => tNumberTriviaModel);
         // act
         repository.getRandomNumberTrivia();
         // assert
