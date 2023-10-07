@@ -44,6 +44,10 @@ class NumberTriviaPage extends StatelessWidget {
                       message: state.message,
                     );
                   }
+                  return SizedBox(
+                    height: MediaQuery.of(context).size.height / 3,
+                    child: const Placeholder(),
+                  );
                 },
               ),
               SizedBox(height: 20),
