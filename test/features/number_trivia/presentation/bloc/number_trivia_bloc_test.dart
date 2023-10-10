@@ -6,21 +6,18 @@ import 'package:clean_architecture_tdd_course/features/number_trivia/domain/usec
 import 'package:clean_architecture_tdd_course/features/number_trivia/domain/usecases/get_random_number_trivia.dart';
 import 'package:clean_architecture_tdd_course/features/number_trivia/presentation/bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class MockGetConcreteNumberTrivia extends Mock
-    implements GetConcreteNumberTrivia {}
+import 'number_trivia_bloc_test.mocks.dart';
 
-class MockGetRandomNumberTrivia extends Mock implements GetRandomNumberTrivia {}
-
-class MockInputConverter extends Mock implements InputConverter {}
-
+@GenerateMocks([GetConcreteNumberTrivia, GetRandomNumberTrivia, InputConverter])
 void main() {
-  NumberTriviaBloc bloc;
-  MockGetConcreteNumberTrivia mockGetConcreteNumberTrivia;
-  MockGetRandomNumberTrivia mockGetRandomNumberTrivia;
-  MockInputConverter mockInputConverter;
+  late NumberTriviaBloc bloc;
+  late MockGetConcreteNumberTrivia mockGetConcreteNumberTrivia;
+  late MockGetRandomNumberTrivia mockGetRandomNumberTrivia;
+  late MockInputConverter mockInputConverter;
 
   setUp(() {
     mockGetConcreteNumberTrivia = MockGetConcreteNumberTrivia();
@@ -28,15 +25,15 @@ void main() {
     mockInputConverter = MockInputConverter();
 
     bloc = NumberTriviaBloc(
-      concrete: mockGetConcreteNumberTrivia,
-      random: mockGetRandomNumberTrivia,
+      getConcreteNumberTrivia: mockGetConcreteNumberTrivia,
+      getRandomNumberTrivia: mockGetRandomNumberTrivia,
       inputConverter: mockInputConverter,
     );
   });
 
   test('initialState should be Empty', () {
     // assert
-    expect(bloc.initialState, equals(Empty()));
+    expect(bloc.state, equals(Empty()));
   });
 
   group('GetTriviaForConcreteNumber', () {
@@ -47,10 +44,12 @@ void main() {
     void setUpMockInputConverterSuccess() =>
         when(mockInputConverter.stringToUnsignedInteger(any))
             .thenReturn(Right(tNumberParsed));
-
+    // The Bloc state is managed using a Stream. Therefore, we use async* instead of async. This is because async* allows us to yield each state change, effectively catching and handling each one.
+    // For a more detailed explanation on the difference between async and async*, you can refer to this StackOverflow post:
+    // https://stackoverflow.com/questions/55397023/whats-the-difference-between-async-and-async-in-dart#:~:text=Async%20functions%20execute%20synchronously%20until,async%20function%20body%20executes%20immediately.&text=Async*%20is%20used%20to%20create,is%20wrapped%20in%20a%20Stream.
     test(
       'should call the InputConverter to validate and convert the string to an unsigned integer',
-      () async {
+      () async* {
         // arrange
         setUpMockInputConverterSuccess();
         // act
@@ -63,7 +62,7 @@ void main() {
 
     test(
       'should emit [Error] when the input is invalid',
-      () async {
+      () async* {
         // arrange
         when(mockInputConverter.stringToUnsignedInteger(any))
             .thenReturn(Left(InvalidInputFailure()));
@@ -80,7 +79,7 @@ void main() {
 
     test(
       'should get data from the concrete use case',
-      () async {
+      () async* {
         // arrange
         setUpMockInputConverterSuccess();
         when(mockGetConcreteNumberTrivia(any))
@@ -95,7 +94,7 @@ void main() {
 
     test(
       'should emit [Loading, Loaded] when data is gotten successfully',
-      () async {
+      () async* {
         // arrange
         setUpMockInputConverterSuccess();
         when(mockGetConcreteNumberTrivia(any))
@@ -114,7 +113,7 @@ void main() {
 
     test(
       'should emit [Loading, Error] when getting data fails',
-      () async {
+      () async* {
         // arrange
         setUpMockInputConverterSuccess();
         when(mockGetConcreteNumberTrivia(any))
@@ -133,7 +132,7 @@ void main() {
 
     test(
       'should emit [Loading, Error] with a proper message for the error when getting data fails',
-      () async {
+      () async* {
         // arrange
         setUpMockInputConverterSuccess();
         when(mockGetConcreteNumberTrivia(any))
@@ -156,7 +155,7 @@ void main() {
 
     test(
       'should get data from the random use case',
-      () async {
+      () async* {
         // arrange
         when(mockGetRandomNumberTrivia(any))
             .thenAnswer((_) async => Right(tNumberTrivia));
@@ -170,7 +169,7 @@ void main() {
 
     test(
       'should emit [Loading, Loaded] when data is gotten successfully',
-      () async {
+      () async* {
         // arrange
         when(mockGetRandomNumberTrivia(any))
             .thenAnswer((_) async => Right(tNumberTrivia));
@@ -188,7 +187,7 @@ void main() {
 
     test(
       'should emit [Loading, Error] when getting data fails',
-      () async {
+      () async* {
         // arrange
         when(mockGetRandomNumberTrivia(any))
             .thenAnswer((_) async => Left(ServerFailure()));
@@ -206,7 +205,7 @@ void main() {
 
     test(
       'should emit [Loading, Error] with a proper message for the error when getting data fails',
-      () async {
+      () async* {
         // arrange
         when(mockGetRandomNumberTrivia(any))
             .thenAnswer((_) async => Left(CacheFailure()));

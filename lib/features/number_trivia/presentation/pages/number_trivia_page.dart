@@ -1,5 +1,5 @@
 import 'package:clean_architecture_tdd_course/features/number_trivia/presentation/bloc/bloc.dart';
-import 'package:clean_architecture_tdd_course/features/number_trivia/presentation/bloc/number_trivia_bloc.dart';
+
 import 'package:clean_architecture_tdd_course/features/number_trivia/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,6 +44,10 @@ class NumberTriviaPage extends StatelessWidget {
                       message: state.message,
                     );
                   }
+                  return SizedBox(
+                    height: MediaQuery.of(context).size.height / 3,
+                    child: const Placeholder(),
+                  );
                 },
               ),
               SizedBox(height: 20),
